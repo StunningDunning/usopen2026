@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<!-- saved from url=(0050)file:///C:/Users/edunn/Downloads/usopen2026_1.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>U.S. Open 2026 Pool</title>
+<link href="./U.S. Open 2026 Pool_files/css2" rel="stylesheet">
+<style>
+:root{--green:#0a2342;--green2:#16456b;--gold:#b08d2c;--gold2:#d4af47;--cream:#f7f6f2;--cream2:#ebe9e2;--text:#1a1a1a;--muted:#6b6460;--border:#d4cfc0;--white:#ffffff;--red:#8b1a1a;--under:#0a2342;--over:#8b1a1a;--r:10px}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100vh;background:var(--cream);color:var(--text);font-family:'DM Sans',sans-serif}
+.hdr{background:var(--green);color:#fff;padding:0;position:relative;overflow:hidden}
+.hdr-pattern{position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,0.02) 0,rgba(255,255,255,0.02) 1px,transparent 1px,transparent 12px);pointer-events:none}
+.hdr-inner{position:relative;z-index:1;padding:1.5rem 1.5rem 0}
+.hdr-top{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:1.25rem}
+.hdr-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold2);margin-bottom:6px}
+.hdr-title{font-family:'Playfair Display',serif;font-size:clamp(24px,6vw,42px);font-weight:900;line-height:1;letter-spacing:-1px}
+.hdr-title span{color:var(--gold)}
+.hdr-sub{font-size:12px;color:rgba(255,255,255,0.5);margin-top:6px;font-family:'DM Mono',monospace}
+.hdr-right{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.refresh-btn{background:transparent;border:1px solid rgba(176,141,44,0.6);color:var(--gold2);border-radius:6px;padding:8px 16px;font-size:12px;font-family:'DM Mono',monospace;cursor:pointer;letter-spacing:0.05em;transition:all 0.2s;display:flex;align-items:center;gap:6px}
+.refresh-btn:hover{background:var(--gold);color:var(--green);border-color:var(--gold)}
+.refresh-btn:disabled{opacity:0.5;cursor:not-allowed}
+.refresh-time{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,0.35)}
+.gold-bar{height:3px;background:linear-gradient(90deg,var(--gold),var(--gold2),transparent)}
+.tabs{background:var(--white);border-bottom:1px solid var(--border);display:flex;padding:0 1.5rem;overflow-x:auto}
+.tab{padding:14px 20px;font-size:13px;font-family:'DM Mono',monospace;letter-spacing:0.04em;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;transition:all 0.15s}
+.tab:hover{color:var(--text)}
+.tab.active{color:var(--green);border-bottom-color:var(--gold);font-weight:500}
+.tab.locked-tab{opacity:0.4;cursor:not-allowed;text-decoration:line-through}
+.content{padding:1.5rem;max-width:860px;margin:0 auto}
+.hidden{display:none!important}
+.card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem;margin-bottom:1rem}
+.card-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.status{padding:10px 14px;border-radius:8px;font-size:13px;margin-bottom:12px}
+.status-ok{background:#e8f5ee;color:#0a2342;border:1px solid #a8d5b8}
+.status-warn{background:#fef9e7;color:#7d5a00;border:1px solid #f0d080}
+.status-err{background:#fdeaea;color:#8b1a1a;border:1px solid #f0b8b8}
+.lb-table{width:100%;border-collapse:collapse;font-size:13px}
+.lb-table th{text-align:left;padding:8px 10px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border)}
+.lb-table td{padding:9px 10px;border-bottom:1px solid var(--cream2);vertical-align:middle}
+.lb-table tr:last-child td{border-bottom:none}
+.lb-table tr:hover td{background:var(--cream)}
+.pos-cell{font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);width:40px}
+.pos-gold{font-weight:700;color:#b08d2c}
+.under{color:var(--under);font-weight:500;font-family:'DM Mono',monospace}
+.over{color:var(--over);font-weight:500;font-family:'DM Mono',monospace}
+.even{color:var(--muted);font-family:'DM Mono',monospace}
+.cut-txt{color:#aaa;font-style:italic;font-size:12px}
+.thru{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted)}
+.cut-row td{opacity:0.5}
+.entry-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);margin-bottom:10px;overflow:hidden;transition:box-shadow 0.2s,border-color 0.2s}
+.entry-card:hover{box-shadow:0 2px 16px rgba(0,0,0,0.07)}
+.entry-card.rank-1{border-color:var(--gold);border-width:2px}
+.entry-card.rank-2{border-color:#c0c0c0}
+.entry-card.rank-3{border-color:#cd7f32}
+.entry-header{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;cursor:pointer;user-select:none}
+.entry-header:hover{background:var(--cream)}
+.entry-left{display:flex;align-items:center;gap:12px}
+.rank-num{font-family:'Playfair Display',serif;font-size:32px;font-weight:900;line-height:1;min-width:40px}
+.rank-1 .rank-num{color:var(--gold)}
+.rank-2 .rank-num{color:#aaa}
+.rank-3 .rank-num{color:#cd7f32}
+.rank-other .rank-num{color:var(--border)}
+.entry-name{font-size:17px;font-weight:500}
+.entry-tb{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);margin-top:2px}
+.entry-right{display:flex;align-items:center;gap:12px}
+.entry-total{font-family:'Playfair Display',serif;font-size:28px;font-weight:700}
+.chevron{font-size:12px;color:var(--muted);transition:transform 0.2s;display:inline-block}
+.chevron.open{transform:rotate(180deg)}
+.entry-body{border-top:1px solid var(--cream2);padding:0 1.25rem 1rem}
+.entry-picks-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:10px}
+.entry-picks-table th{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);padding:4px 8px;border-bottom:1px solid var(--cream2);text-align:left}
+.entry-picks-table td{padding:6px 8px;border-bottom:1px solid var(--cream2)}
+.entry-picks-table tr:last-child td{border-bottom:none}
+.grp-badge{display:inline-block;font-family:'DM Mono',monospace;font-size:9px;padding:1px 5px;border-radius:3px;font-weight:500;margin-right:4px}
+.grp-A{background:#e8eef7;color:#0a2342}
+.grp-B{background:#e8f0fc;color:#1a3a6b}
+.grp-C{background:#fef9e7;color:#7d5a00}
+.grp-D{background:#f0ece0;color:#5a5040}
+.no-entries{text-align:center;padding:3rem 1rem;color:var(--muted);font-size:14px}
+.no-entries a{color:var(--green);cursor:pointer;text-decoration:underline}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.form-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+input[type=text],input[type=number],input[type=password]{width:100%;border:1px solid var(--border);border-radius:8px;padding:9px 12px;font-size:14px;font-family:'DM Sans',sans-serif;background:var(--white);color:var(--text);outline:none;transition:border-color 0.15s}
+input:focus{border-color:var(--green)}
+.golfer-section{margin-bottom:18px}
+.grp-header{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.grp-title{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted)}
+.grp-count{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);opacity:0.7}
+.golfer-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:5px}
+.g-btn{padding:7px 10px;font-size:12px;font-family:'DM Sans',sans-serif;border:1px solid var(--border);border-radius:6px;cursor:pointer;background:var(--white);color:var(--text);text-align:left;transition:all 0.12s;line-height:1.3}
+.g-btn:hover:not(.g-disabled){border-color:var(--green);background:var(--cream)}
+.g-btn.g-selected{background:var(--green);color:#fff;border-color:var(--green)}
+.g-btn.g-disabled{opacity:0.35;cursor:not-allowed}
+.picks-wrap{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px;min-height:28px}
+.pick-chip{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;background:var(--cream2);border-radius:20px;font-size:12px;border:1px solid var(--border)}
+.pick-x{cursor:pointer;color:var(--muted);font-size:15px;line-height:1;margin-left:2px}
+.pick-x:hover{color:var(--red)}
+.submit-btn{width:100%;padding:13px;background:var(--green);color:#fff;border:none;border-radius:8px;font-size:15px;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer;transition:background 0.2s}
+.submit-btn:hover{background:var(--green2)}
+.submit-btn:disabled{opacity:0.5;cursor:not-allowed}
+.admin-btn{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.06em;background:transparent;border:1px solid var(--border);border-radius:5px;padding:6px 12px;cursor:pointer;color:var(--muted);transition:all 0.15s}
+.admin-btn:hover{border-color:var(--green);color:var(--green)}
+.admin-btn.danger:hover{border-color:var(--red);color:var(--red)}
+.admin-btn.active{background:var(--red);color:#fff;border-color:var(--red)}
+.admin-section{border:1px solid var(--border);border-radius:var(--r);padding:1.25rem;margin-bottom:1rem;background:var(--white)}
+.admin-section-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.delete-btn{background:transparent;border:1px solid var(--border);border-radius:5px;padding:3px 8px;font-size:11px;cursor:pointer;color:var(--muted);font-family:'DM Mono',monospace}
+.delete-btn:hover{border-color:var(--red);color:var(--red)}
+.score-input{width:70px;padding:5px 8px;border:1px solid var(--border);border-radius:5px;font-size:12px;font-family:'DM Mono',monospace;text-align:center}
+.score-input:focus{border-color:var(--green);outline:none}
+.locked-banner{background:#fef9e7;border:1px solid #f0d080;border-radius:8px;padding:12px 16px;margin-bottom:1rem;font-size:14px;color:#7d5a00;text-align:center}
+.info-banner{background:#e8eef7;border:1px solid #b8cae0;border-radius:8px;padding:10px 14px;margin-bottom:1rem;font-size:13px;color:#0a2342;text-align:center;font-family:'DM Mono',monospace}
+.loading{text-align:center;padding:2rem;color:var(--muted);font-size:13px;font-family:'DM Mono',monospace}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{animation:fadeIn 0.25s ease forwards}
+@media(max-width:500px){.form-grid{grid-template-columns:1fr}.hdr-top{flex-direction:column}.hdr-right{align-items:flex-start}}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-pattern"></div>
+  <div class="hdr-inner">
+    <div class="hdr-top">
+      <div>
+        <div class="hdr-eyebrow">Shinnecock Hills · June 18–21, 2026</div>
+        <div class="hdr-title">U.S. Open <span>Pool</span></div>
+        <div class="hdr-sub">7 picks · best 4 count · lowest total wins</div>
+      </div>
+      <div class="hdr-right">
+        <button class="refresh-btn" id="refreshBtn" onclick="fetchLeaderboard()">↻ Refresh scores</button>
+        <div class="refresh-time" id="refreshTime">Updated 04:18 PM</div>
+      </div>
+    </div>
+  </div>
+  <div class="gold-bar"></div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="showTab(&#39;standings&#39;)">Standings</div>
+  <div class="tab" onclick="showTab(&#39;leaderboard&#39;)">Leaderboard</div>
+  <div class="tab" id="enterTab" onclick="showTab(&#39;enter&#39;)">Enter Picks</div>
+  <div class="tab" onclick="showTab(&#39;admin&#39;)">Admin</div>
+</div>
+
+<div id="tab-standings" class="content">
+  <div id="standingsContent"><div class="no-entries">No entries yet — <a onclick="showTab(&#39;enter&#39;)">add your picks</a> to get started.</div></div>
+</div>
+
+<div id="tab-leaderboard" class="content hidden">
+  <div class="card">
+    <div class="card-title">Live U.S. Open Leaderboard — Shinnecock Hills</div>
+    <div id="lbContent"><table class="lb-table"><thead><tr><th>Pos</th><th>Player</th><th>Score</th><th>Thru</th></tr></thead><tbody><tr class=""><td class="pos-cell ">-</td><td>Ludvig Åberg</td><td class="even">E</td><td class="thru">2026-06-18T11:52:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Daniel Berger</td><td class="even">E</td><td class="thru">2026-06-18T11:41:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Akshay Bhatia</td><td class="even">E</td><td class="thru">2026-06-18T17:58:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Zac Blair</td><td class="even">E</td><td class="thru">2026-06-18T17:03:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Keegan Bradley</td><td class="even">E</td><td class="thru">2026-06-18T11:41:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Michael Brennan</td><td class="even">E</td><td class="thru">2026-06-18T17:03:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Jacob Bridgeman</td><td class="even">E</td><td class="thru">2026-06-18T12:14:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Sam Burns</td><td class="even">E</td><td class="thru">2026-06-18T11:41:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Laurie Canter</td><td class="even">E</td><td class="thru">2026-06-18T16:41:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Patrick Cantlay</td><td class="even">E</td><td class="thru">2026-06-18T18:09:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Bud Cauley</td><td class="even">E</td><td class="thru">2026-06-18T16:52:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Filippo Celli</td><td class="even">E</td><td class="thru">2026-06-18T12:36:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Adrien Dumont de Chassart</td><td class="even">E</td><td class="thru">2026-06-18T11:08:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Wyndham Clark</td><td class="even">E</td><td class="thru">2026-06-18T17:36:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Hamilton Coleman</td><td class="even">E</td><td class="thru">2026-06-18T10:35:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Corey Conners</td><td class="even">E</td><td class="thru">2026-06-18T17:25:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Pierceson Coody</td><td class="even">E</td><td class="thru">2026-06-18T17:03:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Ugo Coussaud</td><td class="even">E</td><td class="thru">2026-06-18T16:41:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Ryder Cowan</td><td class="even">E</td><td class="thru">2026-06-18T16:30:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Jason Day</td><td class="even">E</td><td class="thru">2026-06-18T17:14:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Bryson DeChambeau</td><td class="even">E</td><td class="thru">2026-06-18T17:25:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Cooper Dossey</td><td class="even">E</td><td class="thru">2026-06-18T10:46:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Nico Echavarria</td><td class="even">E</td><td class="thru">2026-06-18T17:58:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Harris English</td><td class="even">E</td><td class="thru">2026-06-18T12:03:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Ethan Fang</td><td class="even">E</td><td class="thru">2026-06-18T10:46:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Alex Fitzpatrick</td><td class="even">E</td><td class="thru">2026-06-18T12:25:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Matt Fitzpatrick</td><td class="even">E</td><td class="thru">2026-06-18T17:25:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Tommy Fleetwood</td><td class="even">E</td><td class="thru">2026-06-18T11:52:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Marek Fleming</td><td class="even">E</td><td class="thru">2026-06-18T18:42:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Rickie Fowler</td><td class="even">E</td><td class="thru">2026-06-18T11:41:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Ryan Fox</td><td class="even">E</td><td class="thru">2026-06-18T17:25:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Ryan Gerard</td><td class="even">E</td><td class="thru">2026-06-18T17:36:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Chris Gotterup</td><td class="even">E</td><td class="thru">2026-06-18T11:30:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Max Greyserman</td><td class="even">E</td><td class="thru">2026-06-18T12:14:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Ben Griffin</td><td class="even">E</td><td class="thru">2026-06-18T17:36:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Emiliano Grillo</td><td class="even">E</td><td class="thru">2026-06-18T11:08:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Harry Hall</td><td class="even">E</td><td class="thru">2026-06-18T17:03:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Cole Hammer</td><td class="even">E</td><td class="thru">2026-06-18T18:31:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Vaughn Harber</td><td class="even">E</td><td class="thru">2026-06-18T12:47:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Nick Hardy</td><td class="even">E</td><td class="thru">2026-06-18T18:31:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Brian Harman</td><td class="even">E</td><td class="thru">2026-06-18T12:14:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Padraig Harrington</td><td class="even">E</td><td class="thru">2026-06-18T11:19:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Tyrrell Hatton</td><td class="even">E</td><td class="thru">2026-06-18T11:41:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Russell Henley</td><td class="even">E</td><td class="thru">2026-06-18T17:36:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Lucas Herbert</td><td class="even">E</td><td class="thru">2026-06-18T11:30:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Jackson Herrington</td><td class="even">E</td><td class="thru">2026-06-18T10:46:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Angel Hidalgo</td><td class="even">E</td><td class="thru">2026-06-18T18:31:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Robbie Higgins</td><td class="even">E</td><td class="thru">2026-06-18T12:47:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Harry Higgs</td><td class="even">E</td><td class="thru">2026-06-18T10:35:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Ryo Hisatsune</td><td class="even">E</td><td class="thru">2026-06-18T17:25:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Nicolai Højgaard</td><td class="even">E</td><td class="thru">2026-06-18T17:58:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>J.B. Holmes</td><td class="even">E</td><td class="thru">2026-06-18T12:36:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Brandon Holtz</td><td class="even">E</td><td class="thru">2026-06-18T12:36:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Billy Horschel</td><td class="even">E</td><td class="thru">2026-06-18T18:09:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Viktor Hovland</td><td class="even">E</td><td class="thru">2026-06-18T17:25:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Mason Howell</td><td class="even">E</td><td class="thru">2026-06-18T12:14:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Sungjae Im</td><td class="even">E</td><td class="thru">2026-06-18T11:30:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Ben James</td><td class="even">E</td><td class="thru">2026-06-18T12:25:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Dustin Johnson</td><td class="even">E</td><td class="thru">2026-06-18T17:36:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Matthew Jordan</td><td class="even">E</td><td class="thru">2026-06-18T10:57:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Johnny Keefer</td><td class="even">E</td><td class="thru">2026-06-18T18:20:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>T.K. Kim</td><td class="even">E</td><td class="thru">2026-06-18T18:42:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Tom Kim</td><td class="even">E</td><td class="thru">2026-06-18T12:25:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Si Woo Kim</td><td class="even">E</td><td class="thru">2026-06-18T11:41:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Michael Kim</td><td class="even">E</td><td class="thru">2026-06-18T12:25:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Nathan Kimsey</td><td class="even">E</td><td class="thru">2026-06-18T10:46:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Chris Kirk</td><td class="even">E</td><td class="thru">2026-06-18T16:52:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Kurt Kitayama</td><td class="even">E</td><td class="thru">2026-06-18T11:52:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Jake Knapp</td><td class="even">E</td><td class="thru">2026-06-18T16:52:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Brooks Koepka</td><td class="even">E</td><td class="thru">2026-06-18T11:30:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Ben Kohles</td><td class="even">E</td><td class="thru">2026-06-18T18:20:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Jackson Koivun</td><td class="even">E</td><td class="thru">2026-06-18T12:25:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Chase Kyes</td><td class="even">E</td><td class="thru">2026-06-18T10:57:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Greyson Leach</td><td class="even">E</td><td class="thru">2026-06-18T12:47:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Min Woo Lee</td><td class="even">E</td><td class="thru">2026-06-18T17:58:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Bryan Lee</td><td class="even">E</td><td class="thru">2026-06-18T16:41:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Eric Lee</td><td class="even">E</td><td class="thru">2026-06-18T10:57:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Shane Lowry</td><td class="even">E</td><td class="thru">2026-06-18T17:47:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Robert MacIntyre</td><td class="even">E</td><td class="thru">2026-06-18T17:58:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Hideki Matsuyama</td><td class="even">E</td><td class="thru">2026-06-18T17:47:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Matt McCarty</td><td class="even">E</td><td class="thru">2026-06-18T18:20:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Graeme McDowell</td><td class="even">E</td><td class="thru">2026-06-18T11:19:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Max McGreevy</td><td class="even">E</td><td class="thru">2026-06-18T16:52:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Rory McIlroy</td><td class="even">E</td><td class="thru">2026-06-18T11:52:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Maverick McNealy</td><td class="even">E</td><td class="thru">2026-06-18T12:03:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Keith Mitchell</td><td class="even">E</td><td class="thru">2026-06-18T11:19:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Taylor Montgomery</td><td class="even">E</td><td class="thru">2026-06-18T10:35:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Collin Morikawa</td><td class="even">E</td><td class="thru">2026-06-18T17:14:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>William Mouw</td><td class="even">E</td><td class="thru">2026-06-18T16:30:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>James Nicholas</td><td class="even">E</td><td class="thru">2026-06-18T10:35:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Joaquín Niemann</td><td class="even">E</td><td class="thru">2026-06-18T17:47:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Alex Noren</td><td class="even">E</td><td class="thru">2026-06-18T12:03:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Niklas Nørgaard</td><td class="even">E</td><td class="thru">2026-06-18T16:30:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Andrew Novak</td><td class="even">E</td><td class="thru">2026-06-18T11:52:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Ryuichi Oiwa</td><td class="even">E</td><td class="thru">2026-06-18T12:36:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Kaito Onishi</td><td class="even">E</td><td class="thru">2026-06-18T12:47:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Jackson Ormond</td><td class="even">E</td><td class="thru">2026-06-18T12:36:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Carlos Ortiz</td><td class="even">E</td><td class="thru">2026-06-18T17:58:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Jackson Van Paris</td><td class="even">E</td><td class="thru">2026-06-18T16:41:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>John Parry</td><td class="even">E</td><td class="thru">2026-06-18T16:41:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Jake Peacock</td><td class="even">E</td><td class="thru">2026-06-18T12:47:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Chandler Phillips</td><td class="even">E</td><td class="thru">2026-06-18T10:35:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Hennie Du Plessis</td><td class="even">E</td><td class="thru">2026-06-18T16:30:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>J.T. Poston</td><td class="even">E</td><td class="thru">2026-06-18T18:09:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Giuseppe Puebla</td><td class="even">E</td><td class="thru">2026-06-18T18:42:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>David Puig</td><td class="even">E</td><td class="thru">2026-06-18T17:14:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Mateo Pulcini</td><td class="even">E</td><td class="thru">2026-06-18T18:31:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Andrew Putnam</td><td class="even">E</td><td class="thru">2026-06-18T17:03:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Jon Rahm</td><td class="even">E</td><td class="thru">2026-06-18T18:09:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Aaron Rai</td><td class="even">E</td><td class="thru">2026-06-18T17:14:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Patrick Reed</td><td class="even">E</td><td class="thru">2026-06-18T11:52:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Logan Reilly</td><td class="even">E</td><td class="thru">2026-06-18T12:47:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Kristoffer Reitan</td><td class="even">E</td><td class="thru">2026-06-18T11:30:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Matthew Robles</td><td class="even">E</td><td class="thru">2026-06-18T18:42:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Patrick Rodgers</td><td class="even">E</td><td class="thru">2026-06-18T11:19:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Justin Rose</td><td class="even">E</td><td class="thru">2026-06-18T18:09:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Kevin Roy</td><td class="even">E</td><td class="thru">2026-06-18T17:03:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Marcelo Rozo</td><td class="even">E</td><td class="thru">2026-06-18T18:20:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Miles Russell</td><td class="even">E</td><td class="thru">2026-06-18T11:19:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Adrien Saddier</td><td class="even">E</td><td class="thru">2026-06-18T16:41:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Taihei Sato</td><td class="even">E</td><td class="thru">2026-06-18T18:20:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Jayden Schaper</td><td class="even">E</td><td class="thru">2026-06-18T10:46:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Xander Schauffele</td><td class="even">E</td><td class="thru">2026-06-18T17:47:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Scottie Scheffler</td><td class="even">E</td><td class="thru">2026-06-18T12:14:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Matti Schmid</td><td class="even">E</td><td class="thru">2026-06-18T16:52:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Jack Schoenberger</td><td class="even">E</td><td class="thru">2026-06-18T18:31:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Adam Scott</td><td class="even">E</td><td class="thru">2026-06-18T12:03:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Manav Shah</td><td class="even">E</td><td class="thru">2026-06-18T18:42:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Neal Shipley</td><td class="even">E</td><td class="thru">2026-06-18T16:52:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Ben Silverman</td><td class="even">E</td><td class="thru">2026-06-18T11:08:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Alex Smalley</td><td class="even">E</td><td class="thru">2026-06-18T17:47:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Cameron Smith</td><td class="even">E</td><td class="thru">2026-06-18T11:19:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Jake Sollon</td><td class="even">E</td><td class="thru">2026-06-18T18:42:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>J.J. Spaun</td><td class="even">E</td><td class="thru">2026-06-18T12:14:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Jordan Spieth</td><td class="even">E</td><td class="thru">2026-06-18T18:09:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Jimmy Stanger</td><td class="even">E</td><td class="thru">2026-06-18T11:08:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Sam Stevens</td><td class="even">E</td><td class="thru">2026-06-18T10:57:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Preston Stout</td><td class="even">E</td><td class="thru">2026-06-18T17:14:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Sepp Straka</td><td class="even">E</td><td class="thru">2026-06-18T12:03:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Jackson Suber</td><td class="even">E</td><td class="thru">2026-06-18T10:46:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Caleb Surratt</td><td class="even">E</td><td class="thru">2026-06-18T10:35:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Arni Sveinsson</td><td class="even">E</td><td class="thru">2026-06-18T18:20:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Nick Taylor</td><td class="even">E</td><td class="thru">2026-06-18T12:03:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Rocco Repetto Taylor</td><td class="even">E</td><td class="thru">2026-06-18T16:30:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Sahith Theegala</td><td class="even">E</td><td class="thru">2026-06-18T12:25:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Justin Thomas</td><td class="even">E</td><td class="thru">2026-06-18T17:47:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Davis Thompson</td><td class="even">E</td><td class="thru">2026-06-18T17:14:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Spencer Tibbits</td><td class="even">E</td><td class="thru">2026-06-18T18:31:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Alejandro Tosti</td><td class="even">E</td><td class="thru">2026-06-18T10:57:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Peter Uihlein</td><td class="even">E</td><td class="thru">2026-06-18T10:57:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Gary Woodland</td><td class="even">E</td><td class="thru">2026-06-18T17:36:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Brandon Wu</td><td class="even">E</td><td class="thru">2026-06-18T11:08:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Dylan Wu</td><td class="even">E</td><td class="thru">2026-06-18T12:36:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Sudarshan Yellamaraju</td><td class="even">E</td><td class="thru">2026-06-18T16:30:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Cameron Young</td><td class="even">E</td><td class="thru">2026-06-18T11:30:00Z</td></tr><tr class=""><td class="pos-cell ">-</td><td>Carl Yuan</td><td class="even">E</td><td class="thru">2026-06-18T11:08:00Z</td></tr></tbody></table></div>
+  </div>
+</div>
+
+<div id="tab-enter" class="content hidden">
+  <div id="lockedBanner" class="locked-banner hidden">🔒 Pick submissions are locked.</div>
+  <div id="enterForm" style="opacity: 1; pointer-events: auto;">
+    <div class="card">
+      <div class="card-title">Your info</div>
+      <div class="form-grid">
+        <div><div class="form-label">Your name</div><input type="text" id="entrantName" placeholder="e.g. Evan"></div>
+        <div><div class="form-label">Tiebreaker — winning score to par</div><input type="number" id="tiebreaker" placeholder="e.g. -8"></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Select 7 golfers</div>
+      <div id="pickStatus" class="status status-warn">0/7 selected — max 1 from A · max 1 from B · max 2 from C</div>
+      <div class="picks-wrap" id="picksSummary"></div>
+      <div class="golfer-section">
+        <div class="grp-header"><span class="grp-badge grp-A">A</span><span class="grp-title">Group A — World Rank 1–5</span><span class="grp-count" id="cntA">(0/1)</span></div>
+        <div class="golfer-grid" id="gridA"><button class="g-btn" id="btn-Scottie_Scheffler" onclick="togglePick(&#39;Scottie Scheffler&#39;,&#39;A&#39;)">Scottie Scheffler</button><button class="g-btn" id="btn-Rory_McIlroy" onclick="togglePick(&#39;Rory McIlroy&#39;,&#39;A&#39;)">Rory McIlroy</button><button class="g-btn" id="btn-Cameron_Young" onclick="togglePick(&#39;Cameron Young&#39;,&#39;A&#39;)">Cameron Young</button><button class="g-btn" id="btn-Matt_Fitzpatrick" onclick="togglePick(&#39;Matt Fitzpatrick&#39;,&#39;A&#39;)">Matt Fitzpatrick</button><button class="g-btn" id="btn-Russell_Henley" onclick="togglePick(&#39;Russell Henley&#39;,&#39;A&#39;)">Russell Henley</button></div>
+      </div>
+      <div class="golfer-section">
+        <div class="grp-header"><span class="grp-badge grp-B">B</span><span class="grp-title">Group B — World Rank 6–15</span><span class="grp-count" id="cntB">(0/1)</span></div>
+        <div class="golfer-grid" id="gridB"><button class="g-btn" id="btn-Tommy_Fleetwood" onclick="togglePick(&#39;Tommy Fleetwood&#39;,&#39;B&#39;)">Tommy Fleetwood</button><button class="g-btn" id="btn-Justin_Rose" onclick="togglePick(&#39;Justin Rose&#39;,&#39;B&#39;)">Justin Rose</button><button class="g-btn" id="btn-Jon_Rahm" onclick="togglePick(&#39;Jon Rahm&#39;,&#39;B&#39;)">Jon Rahm</button><button class="g-btn" id="btn-JJ_Spaun" onclick="togglePick(&#39;J.J. Spaun&#39;,&#39;B&#39;)">J.J. Spaun</button><button class="g-btn" id="btn-Collin_Morikawa" onclick="togglePick(&#39;Collin Morikawa&#39;,&#39;B&#39;)">Collin Morikawa</button><button class="g-btn" id="btn-Chris_Gotterup" onclick="togglePick(&#39;Chris Gotterup&#39;,&#39;B&#39;)">Chris Gotterup</button><button class="g-btn" id="btn-Xander_Schauffele" onclick="togglePick(&#39;Xander Schauffele&#39;,&#39;B&#39;)">Xander Schauffele</button><button class="g-btn" id="btn-Ludvig_berg" onclick="togglePick(&#39;Ludvig Åberg&#39;,&#39;B&#39;)">Ludvig Åberg</button><button class="g-btn" id="btn-Aaron_Rai" onclick="togglePick(&#39;Aaron Rai&#39;,&#39;B&#39;)">Aaron Rai</button><button class="g-btn" id="btn-Ben_Griffin" onclick="togglePick(&#39;Ben Griffin&#39;,&#39;B&#39;)">Ben Griffin</button></div>
+      </div>
+      <div class="golfer-section">
+        <div class="grp-header"><span class="grp-badge grp-C">C</span><span class="grp-title">Group C — World Rank 16–30</span><span class="grp-count" id="cntC">(0/2)</span></div>
+        <div class="golfer-grid" id="gridC"><button class="g-btn" id="btn-Justin_Thomas" onclick="togglePick(&#39;Justin Thomas&#39;,&#39;C&#39;)">Justin Thomas</button><button class="g-btn" id="btn-Robert_MacIntyre" onclick="togglePick(&#39;Robert MacIntyre&#39;,&#39;C&#39;)">Robert MacIntyre</button><button class="g-btn" id="btn-Si_Woo_Kim" onclick="togglePick(&#39;Si Woo Kim&#39;,&#39;C&#39;)">Si Woo Kim</button><button class="g-btn" id="btn-Sepp_Straka" onclick="togglePick(&#39;Sepp Straka&#39;,&#39;C&#39;)">Sepp Straka</button><button class="g-btn" id="btn-Alex_Noren" onclick="togglePick(&#39;Alex Noren&#39;,&#39;C&#39;)">Alex Noren</button><button class="g-btn" id="btn-Tyrrell_Hatton" onclick="togglePick(&#39;Tyrrell Hatton&#39;,&#39;C&#39;)">Tyrrell Hatton</button><button class="g-btn" id="btn-Harris_English" onclick="togglePick(&#39;Harris English&#39;,&#39;C&#39;)">Harris English</button><button class="g-btn" id="btn-Ryan_Gerard" onclick="togglePick(&#39;Ryan Gerard&#39;,&#39;C&#39;)">Ryan Gerard</button><button class="g-btn" id="btn-Hideki_Matsuyama" onclick="togglePick(&#39;Hideki Matsuyama&#39;,&#39;C&#39;)">Hideki Matsuyama</button><button class="g-btn" id="btn-Jacob_Bridgeman" onclick="togglePick(&#39;Jacob Bridgeman&#39;,&#39;C&#39;)">Jacob Bridgeman</button><button class="g-btn" id="btn-Kristoffer_Reitan" onclick="togglePick(&#39;Kristoffer Reitan&#39;,&#39;C&#39;)">Kristoffer Reitan</button><button class="g-btn" id="btn-Patrick_Reed" onclick="togglePick(&#39;Patrick Reed&#39;,&#39;C&#39;)">Patrick Reed</button><button class="g-btn" id="btn-Viktor_Hovland" onclick="togglePick(&#39;Viktor Hovland&#39;,&#39;C&#39;)">Viktor Hovland</button><button class="g-btn" id="btn-Akshay_Bhatia" onclick="togglePick(&#39;Akshay Bhatia&#39;,&#39;C&#39;)">Akshay Bhatia</button><button class="g-btn" id="btn-Sam_Burns" onclick="togglePick(&#39;Sam Burns&#39;,&#39;C&#39;)">Sam Burns</button></div>
+      </div>
+      <div class="golfer-section">
+        <div class="grp-header"><span class="grp-badge grp-D">D</span><span class="grp-title">Group D — Everyone else</span><span class="grp-count" id="cntD">(0)</span></div>
+        <div class="golfer-grid" id="gridD"><button class="g-btn" id="btn-Daniel_Berger" onclick="togglePick(&#39;Daniel Berger&#39;,&#39;D&#39;)">Daniel Berger</button><button class="g-btn" id="btn-Cooper_Dossey" onclick="togglePick(&#39;Cooper Dossey&#39;,&#39;D&#39;)">Cooper Dossey</button><button class="g-btn" id="btn-Padraig_Harrington" onclick="togglePick(&#39;Padraig Harrington&#39;,&#39;D&#39;)">Padraig Harrington</button><button class="g-btn" id="btn-Johnny_Keefer" onclick="togglePick(&#39;Johnny Keefer&#39;,&#39;D&#39;)">Johnny Keefer</button><button class="g-btn" id="btn-Matt_McCarty" onclick="togglePick(&#39;Matt McCarty&#39;,&#39;D&#39;)">Matt McCarty</button><button class="g-btn" id="btn-Jake_Peacock" onclick="togglePick(&#39;Jake Peacock&#39;,&#39;D&#39;)">Jake Peacock</button><button class="g-btn" id="btn-Matti_Schmid" onclick="togglePick(&#39;Matti Schmid&#39;,&#39;D&#39;)">Matti Schmid</button><button class="g-btn" id="btn-Nick_Taylor" onclick="togglePick(&#39;Nick Taylor&#39;,&#39;D&#39;)">Nick Taylor</button><button class="g-btn" id="btn-Zac_Blair" onclick="togglePick(&#39;Zac Blair&#39;,&#39;D&#39;)">Zac Blair</button><button class="g-btn" id="btn-Hennie_Du_Plessis" onclick="togglePick(&#39;Hennie Du Plessis&#39;,&#39;D&#39;)">Hennie Du Plessis</button><button class="g-btn" id="btn-Lucas_Herbert" onclick="togglePick(&#39;Lucas Herbert&#39;,&#39;D&#39;)">Lucas Herbert</button><button class="g-btn" id="btn-Michael_Kim" onclick="togglePick(&#39;Michael Kim&#39;,&#39;D&#39;)">Michael Kim</button><button class="g-btn" id="btn-Graeme_McDowell" onclick="togglePick(&#39;Graeme McDowell&#39;,&#39;D&#39;)">Graeme McDowell</button><button class="g-btn" id="btn-Chandler_Phillips" onclick="togglePick(&#39;Chandler Phillips&#39;,&#39;D&#39;)">Chandler Phillips</button><button class="g-btn" id="btn-Jack_Schoenberger" onclick="togglePick(&#39;Jack Schoenberger&#39;,&#39;D&#39;)">Jack Schoenberger</button><button class="g-btn" id="btn-Sahith_Theegala" onclick="togglePick(&#39;Sahith Theegala&#39;,&#39;D&#39;)">Sahith Theegala</button><button class="g-btn" id="btn-Keegan_Bradley" onclick="togglePick(&#39;Keegan Bradley&#39;,&#39;D&#39;)">Keegan Bradley</button><button class="g-btn" id="btn-Adrien_Dumont_de_Chassart" onclick="togglePick(&#39;Adrien Dumont de Chassart&#39;,&#39;D&#39;)">Adrien Dumont de Chassart</button><button class="g-btn" id="btn-Jackson_Herrington" onclick="togglePick(&#39;Jackson Herrington&#39;,&#39;D&#39;)">Jackson Herrington</button><button class="g-btn" id="btn-TK_Kim" onclick="togglePick(&#39;T.K. Kim&#39;,&#39;D&#39;)">T.K. Kim</button><button class="g-btn" id="btn-Max_McGreevy" onclick="togglePick(&#39;Max McGreevy&#39;,&#39;D&#39;)">Max McGreevy</button><button class="g-btn" id="btn-JT_Poston" onclick="togglePick(&#39;J.T. Poston&#39;,&#39;D&#39;)">J.T. Poston</button><button class="g-btn" id="btn-Adam_Scott" onclick="togglePick(&#39;Adam Scott&#39;,&#39;D&#39;)">Adam Scott</button><button class="g-btn" id="btn-Davis_Thompson" onclick="togglePick(&#39;Davis Thompson&#39;,&#39;D&#39;)">Davis Thompson</button><button class="g-btn" id="btn-Michael_Brennan" onclick="togglePick(&#39;Michael Brennan&#39;,&#39;D&#39;)">Michael Brennan</button><button class="g-btn" id="btn-Nico_Echavarria" onclick="togglePick(&#39;Nico Echavarria&#39;,&#39;D&#39;)">Nico Echavarria</button><button class="g-btn" id="btn-Angel_Hidalgo" onclick="togglePick(&#39;Angel Hidalgo&#39;,&#39;D&#39;)">Angel Hidalgo</button><button class="g-btn" id="btn-Tom_Kim" onclick="togglePick(&#39;Tom Kim&#39;,&#39;D&#39;)">Tom Kim</button><button class="g-btn" id="btn-Maverick_McNealy" onclick="togglePick(&#39;Maverick McNealy&#39;,&#39;D&#39;)">Maverick McNealy</button><button class="g-btn" id="btn-Giuseppe_Puebla" onclick="togglePick(&#39;Giuseppe Puebla&#39;,&#39;D&#39;)">Giuseppe Puebla</button><button class="g-btn" id="btn-Manav_Shah" onclick="togglePick(&#39;Manav Shah&#39;,&#39;D&#39;)">Manav Shah</button><button class="g-btn" id="btn-Spencer_Tibbits" onclick="togglePick(&#39;Spencer Tibbits&#39;,&#39;D&#39;)">Spencer Tibbits</button><button class="g-btn" id="btn-Laurie_Canter" onclick="togglePick(&#39;Laurie Canter&#39;,&#39;D&#39;)">Laurie Canter</button><button class="g-btn" id="btn-Ethan_Fang" onclick="togglePick(&#39;Ethan Fang&#39;,&#39;D&#39;)">Ethan Fang</button><button class="g-btn" id="btn-Robbie_Higgins" onclick="togglePick(&#39;Robbie Higgins&#39;,&#39;D&#39;)">Robbie Higgins</button><button class="g-btn" id="btn-Nathan_Kimsey" onclick="togglePick(&#39;Nathan Kimsey&#39;,&#39;D&#39;)">Nathan Kimsey</button><button class="g-btn" id="btn-Keith_Mitchell" onclick="togglePick(&#39;Keith Mitchell&#39;,&#39;D&#39;)">Keith Mitchell</button><button class="g-btn" id="btn-David_Puig" onclick="togglePick(&#39;David Puig&#39;,&#39;D&#39;)">David Puig</button><button class="g-btn" id="btn-Neal_Shipley" onclick="togglePick(&#39;Neal Shipley&#39;,&#39;D&#39;)">Neal Shipley</button><button class="g-btn" id="btn-Alejandro_Tosti" onclick="togglePick(&#39;Alejandro Tosti&#39;,&#39;D&#39;)">Alejandro Tosti</button><button class="g-btn" id="btn-Patrick_Cantlay" onclick="togglePick(&#39;Patrick Cantlay&#39;,&#39;D&#39;)">Patrick Cantlay</button><button class="g-btn" id="btn-Alex_Fitzpatrick" onclick="togglePick(&#39;Alex Fitzpatrick&#39;,&#39;D&#39;)">Alex Fitzpatrick</button><button class="g-btn" id="btn-Harry_Higgs" onclick="togglePick(&#39;Harry Higgs&#39;,&#39;D&#39;)">Harry Higgs</button><button class="g-btn" id="btn-Chris_Kirk" onclick="togglePick(&#39;Chris Kirk&#39;,&#39;D&#39;)">Chris Kirk</button><button class="g-btn" id="btn-Taylor_Montgomery" onclick="togglePick(&#39;Taylor Montgomery&#39;,&#39;D&#39;)">Taylor Montgomery</button><button class="g-btn" id="btn-Mateo_Pulcini" onclick="togglePick(&#39;Mateo Pulcini&#39;,&#39;D&#39;)">Mateo Pulcini</button><button class="g-btn" id="btn-Ben_Silverman" onclick="togglePick(&#39;Ben Silverman&#39;,&#39;D&#39;)">Ben Silverman</button><button class="g-btn" id="btn-Jayden_Schaper" onclick="togglePick(&#39;Jayden Schaper&#39;,&#39;D&#39;)">Jayden Schaper</button><button class="g-btn" id="btn-Bud_Cauley" onclick="togglePick(&#39;Bud Cauley&#39;,&#39;D&#39;)">Bud Cauley</button><button class="g-btn" id="btn-Marek_Fleming" onclick="togglePick(&#39;Marek Fleming&#39;,&#39;D&#39;)">Marek Fleming</button><button class="g-btn" id="btn-Ryo_Hisatsune" onclick="togglePick(&#39;Ryo Hisatsune&#39;,&#39;D&#39;)">Ryo Hisatsune</button><button class="g-btn" id="btn-Kurt_Kitayama" onclick="togglePick(&#39;Kurt Kitayama&#39;,&#39;D&#39;)">Kurt Kitayama</button><button class="g-btn" id="btn-William_Mouw" onclick="togglePick(&#39;William Mouw&#39;,&#39;D&#39;)">William Mouw</button><button class="g-btn" id="btn-Andrew_Putnam" onclick="togglePick(&#39;Andrew Putnam&#39;,&#39;D&#39;)">Andrew Putnam</button><button class="g-btn" id="btn-Alex_Smalley" onclick="togglePick(&#39;Alex Smalley&#39;,&#39;D&#39;)">Alex Smalley</button><button class="g-btn" id="btn-Peter_Uihlein" onclick="togglePick(&#39;Peter Uihlein&#39;,&#39;D&#39;)">Peter Uihlein</button><button class="g-btn" id="btn-Filippo_Celli" onclick="togglePick(&#39;Filippo Celli&#39;,&#39;D&#39;)">Filippo Celli</button><button class="g-btn" id="btn-Rickie_Fowler" onclick="togglePick(&#39;Rickie Fowler&#39;,&#39;D&#39;)">Rickie Fowler</button><button class="g-btn" id="btn-Nicolai_Hjgaard" onclick="togglePick(&#39;Nicolai Højgaard&#39;,&#39;D&#39;)">Nicolai Højgaard</button><button class="g-btn" id="btn-Jake_Knapp" onclick="togglePick(&#39;Jake Knapp&#39;,&#39;D&#39;)">Jake Knapp</button><button class="g-btn" id="btn-James_Nicholas" onclick="togglePick(&#39;James Nicholas&#39;,&#39;D&#39;)">James Nicholas</button><button class="g-btn" id="btn-Logan_Reilly" onclick="togglePick(&#39;Logan Reilly&#39;,&#39;D&#39;)">Logan Reilly</button><button class="g-btn" id="btn-Cameron_Smith" onclick="togglePick(&#39;Cameron Smith&#39;,&#39;D&#39;)">Cameron Smith</button><button class="g-btn" id="btn-Jackson_Van_Paris" onclick="togglePick(&#39;Jackson Van Paris&#39;,&#39;D&#39;)">Jackson Van Paris</button><button class="g-btn" id="btn-Wyndham_Clark" onclick="togglePick(&#39;Wyndham Clark&#39;,&#39;D&#39;)">Wyndham Clark</button><button class="g-btn" id="btn-Ryan_Fox" onclick="togglePick(&#39;Ryan Fox&#39;,&#39;D&#39;)">Ryan Fox</button><button class="g-btn" id="btn-JB_Holmes" onclick="togglePick(&#39;J.B. Holmes&#39;,&#39;D&#39;)">J.B. Holmes</button><button class="g-btn" id="btn-Brooks_Koepka" onclick="togglePick(&#39;Brooks Koepka&#39;,&#39;D&#39;)">Brooks Koepka</button><button class="g-btn" id="btn-Joaqun_Niemann" onclick="togglePick(&#39;Joaquín Niemann&#39;,&#39;D&#39;)">Joaquín Niemann</button><button class="g-btn" id="btn-Rocco_Repetto_Taylor" onclick="togglePick(&#39;Rocco Repetto Taylor&#39;,&#39;D&#39;)">Rocco Repetto Taylor</button><button class="g-btn" id="btn-Jake_Sollon" onclick="togglePick(&#39;Jake Sollon&#39;,&#39;D&#39;)">Jake Sollon</button><button class="g-btn" id="btn-Min_Woo_Lee" onclick="togglePick(&#39;Min Woo Lee&#39;,&#39;D&#39;)">Min Woo Lee</button><button class="g-btn" id="btn-Hamilton_Coleman" onclick="togglePick(&#39;Hamilton Coleman&#39;,&#39;D&#39;)">Hamilton Coleman</button><button class="g-btn" id="btn-Max_Greyserman" onclick="togglePick(&#39;Max Greyserman&#39;,&#39;D&#39;)">Max Greyserman</button><button class="g-btn" id="btn-Brandon_Holtz" onclick="togglePick(&#39;Brandon Holtz&#39;,&#39;D&#39;)">Brandon Holtz</button><button class="g-btn" id="btn-Ben_Kohles" onclick="togglePick(&#39;Ben Kohles&#39;,&#39;D&#39;)">Ben Kohles</button><button class="g-btn" id="btn-Niklas_Nrgaard" onclick="togglePick(&#39;Niklas Nørgaard&#39;,&#39;D&#39;)">Niklas Nørgaard</button><button class="g-btn" id="btn-Matthew_Robles" onclick="togglePick(&#39;Matthew Robles&#39;,&#39;D&#39;)">Matthew Robles</button><button class="g-btn" id="btn-Jordan_Spieth" onclick="togglePick(&#39;Jordan Spieth&#39;,&#39;D&#39;)">Jordan Spieth</button><button class="g-btn" id="btn-Gary_Woodland" onclick="togglePick(&#39;Gary Woodland&#39;,&#39;D&#39;)">Gary Woodland</button><button class="g-btn" id="btn-Corey_Conners" onclick="togglePick(&#39;Corey Conners&#39;,&#39;D&#39;)">Corey Conners</button><button class="g-btn" id="btn-Emiliano_Grillo" onclick="togglePick(&#39;Emiliano Grillo&#39;,&#39;D&#39;)">Emiliano Grillo</button><button class="g-btn" id="btn-Billy_Horschel" onclick="togglePick(&#39;Billy Horschel&#39;,&#39;D&#39;)">Billy Horschel</button><button class="g-btn" id="btn-Jackson_Koivun" onclick="togglePick(&#39;Jackson Koivun&#39;,&#39;D&#39;)">Jackson Koivun</button><button class="g-btn" id="btn-Andrew_Novak" onclick="togglePick(&#39;Andrew Novak&#39;,&#39;D&#39;)">Andrew Novak</button><button class="g-btn" id="btn-Patrick_Rodgers" onclick="togglePick(&#39;Patrick Rodgers&#39;,&#39;D&#39;)">Patrick Rodgers</button><button class="g-btn" id="btn-Jimmy_Stanger" onclick="togglePick(&#39;Jimmy Stanger&#39;,&#39;D&#39;)">Jimmy Stanger</button><button class="g-btn" id="btn-Brandon_Wu" onclick="togglePick(&#39;Brandon Wu&#39;,&#39;D&#39;)">Brandon Wu</button><button class="g-btn" id="btn-Pierceson_Coody" onclick="togglePick(&#39;Pierceson Coody&#39;,&#39;D&#39;)">Pierceson Coody</button><button class="g-btn" id="btn-Harry_Hall" onclick="togglePick(&#39;Harry Hall&#39;,&#39;D&#39;)">Harry Hall</button><button class="g-btn" id="btn-Mason_Howell" onclick="togglePick(&#39;Mason Howell&#39;,&#39;D&#39;)">Mason Howell</button><button class="g-btn" id="btn-Chase_Kyes" onclick="togglePick(&#39;Chase Kyes&#39;,&#39;D&#39;)">Chase Kyes</button><button class="g-btn" id="btn-Ryuichi_Oiwa" onclick="togglePick(&#39;Ryuichi Oiwa&#39;,&#39;D&#39;)">Ryuichi Oiwa</button><button class="g-btn" id="btn-Kevin_Roy" onclick="togglePick(&#39;Kevin Roy&#39;,&#39;D&#39;)">Kevin Roy</button><button class="g-btn" id="btn-Sam_Stevens" onclick="togglePick(&#39;Sam Stevens&#39;,&#39;D&#39;)">Sam Stevens</button><button class="g-btn" id="btn-Dylan_Wu" onclick="togglePick(&#39;Dylan Wu&#39;,&#39;D&#39;)">Dylan Wu</button><button class="g-btn" id="btn-Ugo_Coussaud" onclick="togglePick(&#39;Ugo Coussaud&#39;,&#39;D&#39;)">Ugo Coussaud</button><button class="g-btn" id="btn-Cole_Hammer" onclick="togglePick(&#39;Cole Hammer&#39;,&#39;D&#39;)">Cole Hammer</button><button class="g-btn" id="btn-Sungjae_Im" onclick="togglePick(&#39;Sungjae Im&#39;,&#39;D&#39;)">Sungjae Im</button><button class="g-btn" id="btn-Greyson_Leach" onclick="togglePick(&#39;Greyson Leach&#39;,&#39;D&#39;)">Greyson Leach</button><button class="g-btn" id="btn-Kaito_Onishi" onclick="togglePick(&#39;Kaito Onishi&#39;,&#39;D&#39;)">Kaito Onishi</button><button class="g-btn" id="btn-Marcelo_Rozo" onclick="togglePick(&#39;Marcelo Rozo&#39;,&#39;D&#39;)">Marcelo Rozo</button><button class="g-btn" id="btn-Preston_Stout" onclick="togglePick(&#39;Preston Stout&#39;,&#39;D&#39;)">Preston Stout</button><button class="g-btn" id="btn-Sudarshan_Yellamaraju" onclick="togglePick(&#39;Sudarshan Yellamaraju&#39;,&#39;D&#39;)">Sudarshan Yellamaraju</button><button class="g-btn" id="btn-Ryder_Cowan" onclick="togglePick(&#39;Ryder Cowan&#39;,&#39;D&#39;)">Ryder Cowan</button><button class="g-btn" id="btn-Vaughn_Harber" onclick="togglePick(&#39;Vaughn Harber&#39;,&#39;D&#39;)">Vaughn Harber</button><button class="g-btn" id="btn-Ben_James" onclick="togglePick(&#39;Ben James&#39;,&#39;D&#39;)">Ben James</button><button class="g-btn" id="btn-Bryan_Lee" onclick="togglePick(&#39;Bryan Lee&#39;,&#39;D&#39;)">Bryan Lee</button><button class="g-btn" id="btn-Jackson_Ormond" onclick="togglePick(&#39;Jackson Ormond&#39;,&#39;D&#39;)">Jackson Ormond</button><button class="g-btn" id="btn-Miles_Russell" onclick="togglePick(&#39;Miles Russell&#39;,&#39;D&#39;)">Miles Russell</button><button class="g-btn" id="btn-Jackson_Suber" onclick="togglePick(&#39;Jackson Suber&#39;,&#39;D&#39;)">Jackson Suber</button><button class="g-btn" id="btn-Carl_Yuan" onclick="togglePick(&#39;Carl Yuan&#39;,&#39;D&#39;)">Carl Yuan</button><button class="g-btn" id="btn-Jason_Day" onclick="togglePick(&#39;Jason Day&#39;,&#39;D&#39;)">Jason Day</button><button class="g-btn" id="btn-Nick_Hardy" onclick="togglePick(&#39;Nick Hardy&#39;,&#39;D&#39;)">Nick Hardy</button><button class="g-btn" id="btn-Dustin_Johnson" onclick="togglePick(&#39;Dustin Johnson&#39;,&#39;D&#39;)">Dustin Johnson</button><button class="g-btn" id="btn-Eric_Lee" onclick="togglePick(&#39;Eric Lee&#39;,&#39;D&#39;)">Eric Lee</button><button class="g-btn" id="btn-Carlos_Ortiz" onclick="togglePick(&#39;Carlos Ortiz&#39;,&#39;D&#39;)">Carlos Ortiz</button><button class="g-btn" id="btn-Adrien_Saddier" onclick="togglePick(&#39;Adrien Saddier&#39;,&#39;D&#39;)">Adrien Saddier</button><button class="g-btn" id="btn-Caleb_Surratt" onclick="togglePick(&#39;Caleb Surratt&#39;,&#39;D&#39;)">Caleb Surratt</button><button class="g-btn" id="btn-Bryson_DeChambeau" onclick="togglePick(&#39;Bryson DeChambeau&#39;,&#39;D&#39;)">Bryson DeChambeau</button><button class="g-btn" id="btn-Brian_Harman" onclick="togglePick(&#39;Brian Harman&#39;,&#39;D&#39;)">Brian Harman</button><button class="g-btn" id="btn-Matthew_Jordan" onclick="togglePick(&#39;Matthew Jordan&#39;,&#39;D&#39;)">Matthew Jordan</button><button class="g-btn" id="btn-Shane_Lowry" onclick="togglePick(&#39;Shane Lowry&#39;,&#39;D&#39;)">Shane Lowry</button><button class="g-btn" id="btn-John_Parry" onclick="togglePick(&#39;John Parry&#39;,&#39;D&#39;)">John Parry</button><button class="g-btn" id="btn-Taihei_Sato" onclick="togglePick(&#39;Taihei Sato&#39;,&#39;D&#39;)">Taihei Sato</button><button class="g-btn" id="btn-Arni_Sveinsson" onclick="togglePick(&#39;Arni Sveinsson&#39;,&#39;D&#39;)">Arni Sveinsson</button></div>
+      </div>
+    </div>
+    <button class="submit-btn" id="submitBtn" onclick="submitEntry()">Submit Picks</button>
+  </div>
+</div>
+
+<div id="tab-admin" class="content hidden">
+  <div id="adminLockCard" class="card">
+    <div class="card-title">Admin Access</div>
+    <div style="max-width:260px">
+      <div class="form-label">PIN</div>
+      <input type="password" id="adminPin" placeholder="Enter admin PIN" onkeydown="if(event.key===&#39;Enter&#39;)checkPin()">
+      <button class="submit-btn" style="margin-top:10px;padding:10px" onclick="checkPin()">Unlock</button>
+    </div>
+    <div id="pinErr" style="color:var(--red);font-size:12px;margin-top:8px;font-family:&#39;DM Mono&#39;,monospace"></div>
+  </div>
+  <div id="adminPanel" class="hidden">
+
+    <div class="admin-section">
+      <div class="admin-section-title">Auto lockout</div>
+      <div id="autoStatus" style="font-size:13px;color:var(--muted);line-height:1.6"></div>
+    </div>
+
+    <div class="admin-section">
+      <div class="admin-section-title">Pick visibility (manual override)</div>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <button class="admin-btn" id="hideBtn" onclick="toggleHide()">👀 Hide all picks</button>
+        <span id="hideStatus" style="font-size:13px;color:var(--muted)"></span>
+      </div>
+    </div>
+
+    <div class="admin-section">
+      <div class="admin-section-title">Pick submissions (manual override)</div>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <button class="admin-btn" id="lockBtn" onclick="toggleLock()">🔒 Lock picks</button>
+        <span id="lockStatus" style="font-size:13px;color:var(--muted)"></span>
+      </div>
+    </div>
+
+    <div class="admin-section">
+      <div class="admin-section-title">Manage entries</div>
+      <div id="adminList"></div>
+    </div>
+
+    <div class="admin-section">
+      <div class="admin-section-title">Manual score overrides (testing)</div>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:14px">Set any golfer's score to par manually. Negative = under par (e.g. -5). Leave blank to use live data. Hit Apply when done.</p>
+      <div id="overrideGrid" style="display:grid;grid-template-columns:1fr;gap:0"></div>
+      <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
+        <button class="admin-btn" onclick="applyOverrides()">Apply overrides</button>
+        <button class="admin-btn danger" onclick="clearOverrides()">Clear all overrides</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const WORKER_URL='https://masters-proxy.edunnin1.workers.dev';
+const TOURNAMENT_ID='401811952';                  // ESPN U.S. Open 2026
+const SUBMISSION_DEADLINE='2026-06-18T04:00:00Z'; // Wed midnight ET — entries due (sheet rule)
+const REVEAL_TIME='2026-06-18T10:35:00Z';         // first tee time (6:35 AM ET Thu) — picks unhide
+const KV_PREFIX='usopen';                          // multi-major: prefixes all shared keys
+const ADMIN_PIN='Go Vols';
+const LS_ENTRIES='usopen2026-entries';
+const LS_LB='usopen2026-lb';
+const LS_OVERRIDES='usopen2026-overrides';
+
+const GROUPS={
+  A:['Scottie Scheffler','Rory McIlroy','Cameron Young','Matt Fitzpatrick','Russell Henley'],
+  B:['Tommy Fleetwood','Justin Rose','Jon Rahm','J.J. Spaun','Collin Morikawa','Chris Gotterup','Xander Schauffele','Ludvig Åberg','Aaron Rai','Ben Griffin'],
+  C:['Justin Thomas','Robert MacIntyre','Si Woo Kim','Sepp Straka','Alex Noren','Tyrrell Hatton','Harris English','Ryan Gerard','Hideki Matsuyama','Jacob Bridgeman','Kristoffer Reitan','Patrick Reed','Viktor Hovland','Akshay Bhatia','Sam Burns'],
+  D:['Daniel Berger','Cooper Dossey','Padraig Harrington','Johnny Keefer','Matt McCarty','Jake Peacock','Matti Schmid','Nick Taylor','Zac Blair','Hennie Du Plessis','Lucas Herbert','Michael Kim','Graeme McDowell','Chandler Phillips','Jack Schoenberger','Sahith Theegala','Keegan Bradley','Adrien Dumont de Chassart','Jackson Herrington','T.K. Kim','Max McGreevy','J.T. Poston','Adam Scott','Davis Thompson','Michael Brennan','Nico Echavarria','Angel Hidalgo','Tom Kim','Maverick McNealy','Giuseppe Puebla','Manav Shah','Spencer Tibbits','Laurie Canter','Ethan Fang','Robbie Higgins','Nathan Kimsey','Keith Mitchell','David Puig','Neal Shipley','Alejandro Tosti','Patrick Cantlay','Alex Fitzpatrick','Harry Higgs','Chris Kirk','Taylor Montgomery','Mateo Pulcini','Ben Silverman','Jayden Schaper','Bud Cauley','Marek Fleming','Ryo Hisatsune','Kurt Kitayama','William Mouw','Andrew Putnam','Alex Smalley','Peter Uihlein','Filippo Celli','Rickie Fowler','Nicolai Højgaard','Jake Knapp','James Nicholas','Logan Reilly','Cameron Smith','Jackson Van Paris','Wyndham Clark','Ryan Fox','J.B. Holmes','Brooks Koepka','Joaquín Niemann','Rocco Repetto Taylor','Jake Sollon','Min Woo Lee','Hamilton Coleman','Max Greyserman','Brandon Holtz','Ben Kohles','Niklas Nørgaard','Matthew Robles','Jordan Spieth','Gary Woodland','Corey Conners','Emiliano Grillo','Billy Horschel','Jackson Koivun','Andrew Novak','Patrick Rodgers','Jimmy Stanger','Brandon Wu','Pierceson Coody','Harry Hall','Mason Howell','Chase Kyes','Ryuichi Oiwa','Kevin Roy','Sam Stevens','Dylan Wu','Ugo Coussaud','Cole Hammer','Sungjae Im','Greyson Leach','Kaito Onishi','Marcelo Rozo','Preston Stout','Sudarshan Yellamaraju','Ryder Cowan','Vaughn Harber','Ben James','Bryan Lee','Jackson Ormond','Miles Russell','Jackson Suber','Carl Yuan','Jason Day','Nick Hardy','Dustin Johnson','Eric Lee','Carlos Ortiz','Adrien Saddier','Caleb Surratt','Bryson DeChambeau','Brian Harman','Matthew Jordan','Shane Lowry','John Parry','Taihei Sato','Arni Sveinsson']
+};
+const LIMITS={A:1,B:1,C:2,D:99};
+const ALL_GOLFERS=[...GROUPS.A,...GROUPS.B,...GROUPS.C,...GROUPS.D];
+
+let picks=[],entries=[],leaderboard=[],adminUnlocked=false;
+let overrides={},manualLocked=false,manualHidden=false,expandedCards={};
+
+// ---- automatic lockout ----
+// Submissions LOCK at the Wednesday-midnight deadline (entry sheet rule).
+// Picks stay HIDDEN until the first tee time, then reveal.
+function tournamentStarted(){return Date.now()>=new Date(REVEAL_TIME).getTime();}
+function deadlinePassed(){return Date.now()>=new Date(SUBMISSION_DEADLINE).getTime();}
+function picksHidden(){return !tournamentStarted()||manualHidden;}
+function picksLocked(){return deadlinePassed()||manualLocked;}
+
+function kvKey(k){return KV_PREFIX+':'+k;}
+
+async function kvGet(key){
+  try{
+    const res=await fetch(WORKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'kv-get',key:kvKey(key)})});
+    const data=await res.json();
+    return data.value?JSON.parse(data.value):null;
+  }catch(e){return null;}
+}
+async function kvSet(key,value){
+  try{
+    await fetch(WORKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'kv-set',key:kvKey(key),value:JSON.stringify(value)})});
+  }catch(e){}
+}
+function localGet(key,fallback){
+  try{const v=localStorage.getItem(key);return v?JSON.parse(v):fallback;}catch(e){return fallback;}
+}
+
+async function loadAllData(){
+  const remoteEntries=await kvGet('entries');
+  entries=remoteEntries||localGet(LS_ENTRIES,[]);
+  try{localStorage.setItem(LS_ENTRIES,JSON.stringify(entries));}catch(e){}
+
+  const remoteLocked=await kvGet('locked');
+  manualLocked=remoteLocked!==null?remoteLocked:false;
+
+  const remoteHidden=await kvGet('hidden');
+  manualHidden=remoteHidden!==null?remoteHidden:false;
+
+  overrides=localGet(LS_OVERRIDES,{});
+
+  renderStandings();
+  updateEnterTab();
+  if(adminUnlocked)renderAdmin();
+}
+
+async function saveEntry(entry){
+  const latest=await kvGet('entries');
+  if(latest) entries=latest;
+  const idx=entries.findIndex(e=>e.name.toLowerCase()===entry.name.toLowerCase());
+  if(idx>=0)entries[idx]=entry;else entries.push(entry);
+  await kvSet('entries',entries);
+  try{localStorage.setItem(LS_ENTRIES,JSON.stringify(entries));}catch(e){}
+  renderStandings();
+}
+
+async function deleteEntry(name){
+  if(!confirm('Delete '+name+'?'))return;
+  entries=entries.filter(e=>e.name.toLowerCase()!==name.toLowerCase());
+  await kvSet('entries',entries);
+  try{localStorage.setItem(LS_ENTRIES,JSON.stringify(entries));}catch(e){}
+  renderStandings();renderAdmin();
+}
+
+async function fetchLeaderboard(){
+  const btn=document.getElementById('refreshBtn');
+  btn.disabled=true;btn.textContent='⟳ Fetching...';
+  try{
+    const res=await fetch(WORKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({action:'leaderboard',tournamentId:TOURNAMENT_ID})
+    });
+    const data=await res.json();
+    if(data.players&&data.players.length){
+      leaderboard=data.players;
+      const now=new Date();
+      document.getElementById('refreshTime').textContent='Updated '+now.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+      try{localStorage.setItem(LS_LB,JSON.stringify({ts:Date.now(),data:leaderboard}));}catch(e){}
+    }
+  }catch(e){console.error(e);}
+  btn.disabled=false;btn.textContent='↻ Refresh scores';
+  renderLeaderboard();renderStandings();
+}
+
+function loadCachedLB(){
+  try{
+    const raw=localStorage.getItem(LS_LB);
+    if(raw){const obj=JSON.parse(raw);if(Date.now()-obj.ts<3600000){leaderboard=obj.data;const d=new Date(obj.ts);document.getElementById('refreshTime').textContent='Cached '+d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});}}
+  }catch(e){}
+}
+
+// Name normalization for matching
+function normName(n){
+  return n.toLowerCase()
+    .replace(/ø/g,'o').replace(/å/g,'a').replace(/é/g,'e').replace(/ó/g,'o')
+    .replace(/ñ/g,'n').replace(/ü/g,'u').replace(/ä/g,'a').replace(/ö/g,'o').replace(/í/g,'i')
+    .replace(/[-]/g,' ').replace(/[^a-z0-9 ]/g,'').replace(/\s+/g,' ').trim();
+}
+function lastNameKey(n){const p=normName(n).split(' ');return p[p.length-1];}
+
+function findPlayer(name){
+  const oKey=Object.keys(overrides).find(k=>k.toLowerCase()===name.toLowerCase());
+  if(oKey!==undefined&&overrides[oKey]!==''){const sc=parseInt(overrides[oKey]);if(!isNaN(sc))return{name,score:sc,position:'OVR',thru:'OVR',_override:true};}
+  if(!leaderboard.length)return null;
+  const nn=normName(name);
+  const parts=nn.split(' ');
+  const last=parts[parts.length-1];
+  const first3=parts[0].slice(0,3);
+  const exact=leaderboard.find(p=>normName(p.name)===nn);
+  if(exact)return exact;
+  const partial=leaderboard.find(p=>{const pn=normName(p.name);return pn.includes(last)&&pn.includes(first3);});
+  if(partial)return partial;
+  return leaderboard.find(p=>normName(p.name).includes(last))||null;
+}
+
+function isCut(p){return p&&(['CUT','WD','DQ','MC'].includes((p.position||'').toUpperCase())||p.status==='STATUS_ELIMINATED');}
+
+function scoreHtml(p){
+  if(!p)return '<span class="even">—</span>';
+  if(isCut(p))return `<span class="cut-txt">${p.position}</span>`;
+  if(p.score===0)return '<span class="even">E</span>';
+  if(p.score<0)return `<span class="under">${p.score}</span>`;
+  return `<span class="over">+${p.score}</span>`;
+}
+
+function calcEntry(entry){
+  const playerScores=entry.picks.map(pk=>{
+    const p=findPlayer(pk.name);
+    if(!p)return{name:pk.name,group:pk.group,lb:null,val:null,cut:false};
+    const cut=isCut(p);
+    return{name:pk.name,group:pk.group,lb:p,val:cut?null:p.score,cut};
+  });
+  const valid=playerScores.filter(s=>s.val!==null).map(s=>s.val).sort((a,b)=>a-b);
+  const cutCount=playerScores.filter(s=>s.cut).length;
+  const unknown=playerScores.filter(s=>s.lb===null).length;
+  const madeCount=entry.picks.length-cutCount-unknown;
+  const hasOverrides=Object.keys(overrides).some(k=>overrides[k]!=='');
+  if(leaderboard.length>0&&!hasOverrides&&madeCount<4){return{playerScores,total:null,best4:[],note:'Needs 4 to make cut'};}
+  const best4vals=valid.slice(0,4);
+  const total=best4vals.length?best4vals.reduce((a,b)=>a+b,0):null;
+  return{playerScores,total,best4:best4vals,note:null};
+}
+
+function renderLeaderboard(){
+  const el=document.getElementById('lbContent');
+  if(!leaderboard.length){el.innerHTML='<div class="loading">Press Refresh to load live U.S. Open scores</div>';return;}
+  // FIX 1: sort the leaderboard. By score once play is underway, alphabetical (by last name) before then.
+  const anyScores=leaderboard.some(p=>p.thru&&p.thru!=='—'&&p.thru!=='');
+  const live=tournamentStarted()||anyScores;
+  const sorted=[...leaderboard].sort((a,b)=>{
+    if(live){
+      const ac=isCut(a),bc=isCut(b);
+      if(ac!==bc)return ac?1:-1;
+      if(a.score!==b.score)return a.score-b.score;
+    }
+    return lastNameKey(a.name).localeCompare(lastNameKey(b.name));
+  });
+  const note=live?'':'<div class="info-banner">Pre-tournament — listed alphabetically. Switches to live scoring order once play begins.</div>';
+  const rows=sorted.map(p=>{
+    const sc=p.score===0?'E':p.score<0?p.score:'+'+p.score;
+    const cls=p.score<0?'under':p.score>0?'over':'even';
+    const posCls=p.position==='1'?'pos-gold':'';
+    const rowCls=isCut(p)?'cut-row':'';
+    return `<tr class="${rowCls}"><td class="pos-cell ${posCls}">${live?p.position:'—'}</td><td>${p.name}</td><td class="${cls}">${isCut(p)?`<span class="cut-txt">${p.position}</span>`:sc}</td><td class="thru">${p.thru||''}</td></tr>`;
+  }).join('');
+  el.innerHTML=note+`<table class="lb-table"><thead><tr><th>Pos</th><th>Player</th><th>Score</th><th>Thru</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+function renderStandings(){
+  const el=document.getElementById('standingsContent');
+  if(!entries.length){el.innerHTML=`<div class="no-entries">No entries yet — <a onclick="showTab('enter')">add your picks</a> to get started.</div>`;return;}
+  const hideNow=picksHidden();
+  const scored=entries.map(e=>({...e,result:calcEntry(e)})).sort((a,b)=>{
+    if(a.result.total===null&&b.result.total===null)return 0;
+    if(a.result.total===null)return 1;
+    if(b.result.total===null)return -1;
+    if(a.result.total!==b.result.total)return a.result.total-b.result.total;
+    const aTb=a.tiebreaker!==''?Math.abs(Number(a.tiebreaker)):999;
+    const bTb=b.tiebreaker!==''?Math.abs(Number(b.tiebreaker)):999;
+    return aTb-bTb;
+  });
+  const lbLoaded=leaderboard.length>0||Object.keys(overrides).some(k=>overrides[k]!=='');
+  const html=scored.map((e,i)=>{
+    const rank=i+1;
+    const rc=rank===1?'rank-1':rank===2?'rank-2':rank===3?'rank-3':'rank-other';
+    const tot=e.result.total;
+    const totTxt=tot===null?'—':tot===0?'E':tot<0?tot:'+'+tot;
+    const totCls=tot!==null&&tot<0?'under':tot!==null&&tot>0?'over':'even';
+    const isOpen=expandedCards[e.name]!==false;
+    const b4set=[...e.result.best4];
+    const pickRows=e.result.playerScores.map(ps=>{
+      let isB4=false;
+      if(ps.val!==null){const idx2=b4set.indexOf(ps.val);if(idx2>=0){b4set.splice(idx2,1);isB4=true;}}
+      const ovrTag=ps.lb&&ps.lb._override?'<span style="font-size:9px;color:var(--gold);margin-left:4px;font-family:DM Mono,monospace">OVR</span>':'';
+      const b4tag=isB4?'<span style="color:var(--green);font-size:11px;margin-left:4px">&#10003;</span>':'';
+      return `<tr><td><span class="grp-badge grp-${ps.group}">${ps.group}</span>${ps.name}${ovrTag}${b4tag}</td><td>${scoreHtml(ps.lb)}</td><td class="thru">${ps.lb&&!ps.lb._override?ps.lb.thru||'':''}</td></tr>`;
+    }).join('');
+    const hiddenBody=`<div style="padding:12px 0;font-size:13px;color:var(--muted);font-family:'DM Mono',monospace;text-align:center">&#128274; Picks hidden until the tournament starts</div>`;
+    return `<div class="entry-card ${rc} fade-in">
+      <div class="entry-header" onclick="${hideNow?'':'toggleCard(\''+e.name.replace(/'/g,"\\'")+'\')'}">
+        <div class="entry-left">
+          <div class="rank-num">${rank}</div>
+          <div><div class="entry-name">${e.name}</div><div class="entry-tb">TB: ${hideNow?'—':e.tiebreaker!==''?e.tiebreaker:'—'}</div></div>
+        </div>
+        <div class="entry-right">
+          <div class="entry-total ${totCls}">${hideNow?'—':totTxt}</div>
+          ${hideNow?'':'<span class="chevron '+(isOpen?'open':'')+'">&#9660;</span>'}
+        </div>
+      </div>
+      ${hideNow?hiddenBody:`<div class="entry-body" ${isOpen?'':'style="display:none"'}>
+        <table class="entry-picks-table">
+          <thead><tr><th>Golfer</th><th>Score</th><th>Thru</th></tr></thead>
+          <tbody>${pickRows}</tbody>
+        </table>
+      </div>`}
+    </div>`;
+  }).join('');
+  let banner='';
+  if(hideNow)banner='<div class="info-banner">&#128274; Picks are hidden until the tournament tees off. Standings unlock automatically at the first tee time.</div>';
+  else if(!lbLoaded)banner='<div class="status status-warn" style="margin-bottom:1rem">Scores not loaded — press Refresh to see live scoring</div>';
+  el.innerHTML=banner+html;
+}
+
+function toggleCard(name){
+  expandedCards[name]=expandedCards[name]===false?true:false;
+  renderStandings();
+}
+
+function initGrids(){
+  for(const g of ['A','B','C','D']){
+    document.getElementById('grid'+g).innerHTML=GROUPS[g].map(n=>{
+      const id='btn-'+n.replace(/\s/g,'_').replace(/[^a-zA-Z_]/g,'');
+      return `<button class="g-btn" id="${id}" onclick="togglePick('${n.replace(/'/g,"\\'")}','${g}')">${n}</button>`;
+    }).join('');
+  }
+}
+
+function togglePick(name,grp){
+  if(picksLocked()){alert('Pick submissions are locked.');return;}
+  const idx=picks.findIndex(p=>p.name===name);
+  if(idx>=0){picks.splice(idx,1);}
+  else{
+    if(picks.length>=7){alert('You already have 7 picks!');return;}
+    const gc=picks.filter(p=>p.group===grp).length;
+    if(gc>=LIMITS[grp]){alert(`Group ${grp} limit reached (max ${LIMITS[grp]})`);return;}
+    picks.push({name,group:grp});
+  }
+  updatePickUI();
+}
+
+function updatePickUI(){
+  const counts={A:0,B:0,C:0,D:0};
+  picks.forEach(p=>counts[p.group]++);
+  document.getElementById('cntA').textContent=`(${counts.A}/1)`;
+  document.getElementById('cntB').textContent=`(${counts.B}/1)`;
+  document.getElementById('cntC').textContent=`(${counts.C}/2)`;
+  document.getElementById('cntD').textContent=`(${counts.D})`;
+  for(const g of ['A','B','C','D']){
+    GROUPS[g].forEach(n=>{
+      const id='btn-'+n.replace(/\s/g,'_').replace(/[^a-zA-Z_]/g,'');
+      const btn=document.getElementById(id);if(!btn)return;
+      const sel=picks.some(p=>p.name===n);
+      const grpFull=!sel&&counts[g]>=LIMITS[g];
+      btn.className='g-btn'+(sel?' g-selected':'')+(grpFull?' g-disabled':'');
+    });
+  }
+  document.getElementById('picksSummary').innerHTML=picks.map(p=>
+    `<span class="pick-chip"><span class="grp-badge grp-${p.group}">${p.group}</span>${p.name}<span class="pick-x" onclick="togglePick('${p.name.replace(/'/g,"\\'")}','${p.group}')">&#215;</span></span>`
+  ).join('');
+  const sb=document.getElementById('pickStatus');
+  if(picks.length===7){sb.className='status status-ok';sb.textContent='7 golfers selected — ready to submit!';}
+  else{sb.className='status status-warn';sb.textContent=`${picks.length}/7 selected — max 1 from A · max 1 from B · max 2 from C`;}
+}
+
+async function submitEntry(){
+  if(picksLocked()){alert('Pick submissions are locked.');return;}
+  const name=document.getElementById('entrantName').value.trim();
+  const tb=document.getElementById('tiebreaker').value.trim();
+  if(!name){alert('Please enter your name');return;}
+  if(picks.length!==7){alert('Please select exactly 7 golfers');return;}
+  const existing=entries.find(e=>e.name.toLowerCase()===name.toLowerCase());
+  if(existing&&!confirm(`An entry for "${name}" already exists. Replace it?`))return;
+  const btn=document.getElementById('submitBtn');
+  btn.disabled=true;btn.textContent='Saving...';
+  await saveEntry({name,tiebreaker:tb,picks:[...picks],submitted:new Date().toISOString()});
+  picks=[];updatePickUI();
+  document.getElementById('entrantName').value='';
+  document.getElementById('tiebreaker').value='';
+  btn.disabled=false;btn.textContent='Submit Picks';
+  alert(`Picks saved for ${name}!`);
+  showTab('standings');
+}
+
+function checkPin(){
+  if(document.getElementById('adminPin').value===ADMIN_PIN){
+    adminUnlocked=true;
+    document.getElementById('adminLockCard').classList.add('hidden');
+    document.getElementById('adminPanel').classList.remove('hidden');
+    renderAdmin();
+  }else{document.getElementById('pinErr').textContent='Incorrect PIN';}
+}
+
+async function toggleHide(){
+  manualHidden=!manualHidden;
+  await kvSet('hidden',manualHidden);
+  updateHideUI();renderStandings();
+}
+function updateHideUI(){
+  const btn=document.getElementById('hideBtn');
+  const status=document.getElementById('hideStatus');
+  if(!btn)return;
+  if(manualHidden){
+    btn.textContent='👁 Show picks';btn.className='admin-btn active';
+    status.textContent='Force-hidden (overrides auto)';status.style.color='var(--red)';
+  }else{
+    btn.textContent='🙈 Force-hide picks';btn.className='admin-btn';
+    status.textContent=picksHidden()?'Auto-hidden until tee time':'Visible';status.style.color='var(--muted)';
+  }
+}
+
+async function toggleLock(){
+  manualLocked=!manualLocked;
+  await kvSet('locked',manualLocked);
+  updateLockUI();updateEnterTab();
+}
+function updateLockUI(){
+  const btn=document.getElementById('lockBtn');
+  const status=document.getElementById('lockStatus');
+  if(!btn)return;
+  if(manualLocked){
+    btn.textContent='🔓 Unlock picks';btn.className='admin-btn active';
+    status.textContent='Force-locked (overrides auto)';status.style.color='var(--red)';
+  }else{
+    btn.textContent='🔒 Force-lock picks';btn.className='admin-btn';
+    status.textContent=picksLocked()?'Auto-locked (tournament started)':'Open';status.style.color='var(--muted)';
+  }
+}
+
+function updateEnterTab(){
+  const tab=document.getElementById('enterTab');
+  const banner=document.getElementById('lockedBanner');
+  const form=document.getElementById('enterForm');
+  if(picksLocked()){
+    tab.classList.add('locked-tab');
+    banner.classList.remove('hidden');
+    banner.innerHTML=deadlinePassed()?'&#128274; The entry deadline has passed — pick submissions are closed.':'&#128274; Pick submissions are locked by the admin.';
+    form.style.opacity='0.4';
+    form.style.pointerEvents='none';
+  }else{
+    tab.classList.remove('locked-tab');
+    banner.classList.add('hidden');
+    form.style.opacity='1';
+    form.style.pointerEvents='auto';
+  }
+}
+
+function renderAdmin(){
+  const auto=document.getElementById('autoStatus');
+  if(auto){
+    const dl=new Date(SUBMISSION_DEADLINE);
+    const tee=new Date(REVEAL_TIME);
+    auto.innerHTML=`Submission deadline: <strong>${dl.toLocaleString([],{dateStyle:'medium',timeStyle:'short'})}</strong> (your local time)<br>`+
+      `Picks reveal at first tee: <strong>${tee.toLocaleString([],{dateStyle:'medium',timeStyle:'short'})}</strong><br>`+
+      `&bull; Picks are ${picksHidden()?'<strong>hidden</strong>':'<strong>visible</strong>'} &middot; submissions are ${picksLocked()?'<strong>locked</strong>':'<strong>open</strong>'}<br>`+
+      `<span style="font-size:11px;opacity:0.7">Auto: open + hidden until the deadline, locked after the deadline, then revealed at first tee. Use the overrides below to change manually.</span>`;
+  }
+  const el=document.getElementById('adminList');
+  if(!entries.length){el.innerHTML='<div style="color:var(--muted);font-size:13px">No entries yet.</div>';}
+  else{
+    el.innerHTML=entries.map(e=>
+      `<div style="display:flex;align-items:flex-start;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--cream2);gap:8px;flex-wrap:wrap">
+        <div>
+          <span style="font-weight:500;font-size:14px">${e.name}</span>
+          <span style="font-size:11px;color:var(--muted);margin-left:8px;font-family:'DM Mono',monospace">TB: ${e.tiebreaker||'—'}</span>
+          <div style="font-size:11px;color:var(--muted);margin-top:4px;line-height:1.6">${e.picks.map(p=>`<span class="grp-badge grp-${p.group}">${p.group}</span>${p.name}`).join('  ')}</div>
+        </div>
+        <button class="delete-btn" onclick="deleteEntry('${e.name.replace(/'/g,"\\'")}')">Delete</button>
+      </div>`
+    ).join('');
+  }
+  const og=document.getElementById('overrideGrid');
+  og.innerHTML=ALL_GOLFERS.map(n=>{
+    const g=Object.keys(GROUPS).find(g=>GROUPS[g].includes(n));
+    const val=overrides[n]||'';
+    const id='ovr-'+n.replace(/\s/g,'_').replace(/[^a-zA-Z_]/g,'');
+    return `<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--cream2)">
+      <span class="grp-badge grp-${g}" style="flex-shrink:0">${g}</span>
+      <span style="font-size:13px;flex:1;min-width:0">${n}</span>
+      <input class="score-input" id="${id}" type="number" value="${val}" placeholder="—" style="flex-shrink:0;width:60px"/>
+    </div>`;
+  }).join('');
+  updateLockUI();
+  updateHideUI();
+}
+
+function applyOverrides(){
+  ALL_GOLFERS.forEach(n=>{
+    const id='ovr-'+n.replace(/\s/g,'_').replace(/[^a-zA-Z_]/g,'');
+    const input=document.getElementById(id);
+    if(input)overrides[n]=input.value;
+  });
+  try{localStorage.setItem(LS_OVERRIDES,JSON.stringify(overrides));}catch(e){}
+  renderStandings();
+  alert('Overrides applied!');
+}
+
+function clearOverrides(){
+  overrides={};
+  try{localStorage.setItem(LS_OVERRIDES,JSON.stringify(overrides));}catch(e){}
+  renderAdmin();renderStandings();
+  alert('Overrides cleared.');
+}
+
+function showTab(t){
+  ['standings','leaderboard','enter','admin'].forEach((id,i)=>{
+    document.getElementById('tab-'+id).classList.toggle('hidden',id!==t);
+    document.querySelectorAll('.tab')[i].classList.toggle('active',id===t);
+  });
+  if(t==='standings')renderStandings();
+  if(t==='leaderboard')renderLeaderboard();
+  if(t==='admin'&&adminUnlocked)renderAdmin();
+}
+
+// ---- init ----
+initGrids();
+updatePickUI();
+updateEnterTab();
+loadCachedLB();
+renderLeaderboard();
+loadAllData();
+fetchLeaderboard();   // FIX 3: auto-load live scores on every page visit (cache shows first)
+</script>
+
+
+</body></html>
