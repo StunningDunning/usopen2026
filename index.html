@@ -217,11 +217,13 @@ input:focus{border-color:var(--green)}
     </div>
 
     <div class="admin-section">
-      <div class="admin-section-title">Pick submissions (manual override)</div>
-      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-        <button class="admin-btn" id="lockBtn" onclick="toggleLock()">&#128274; Lock picks</button>
-        <span id="lockStatus" style="font-size:13px;color:var(--muted)"></span>
+      <div class="admin-section-title">Pick submissions</div>
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px">
+        <button class="admin-btn" id="unlockBtn" onclick="setLock(false)">&#128275; Unlock</button>
+        <button class="admin-btn" id="lockBtn" onclick="setLock(true)">&#128274; Lock</button>
+        <button class="admin-btn" id="autoLockBtn" onclick="setLock(null)">&#9201; Auto</button>
       </div>
+      <span id="lockStatus" style="font-size:13px;color:var(--muted)"></span>
     </div>
 
     <div class="admin-section">
@@ -263,7 +265,7 @@ const LIMITS={A:1,B:1,C:2,D:99};
 const ALL_GOLFERS=[...GROUPS.A,...GROUPS.B,...GROUPS.C,...GROUPS.D];
 
 let picks=[],entries=[],leaderboard=[],adminUnlocked=false;
-let overrides={},manualLocked=false,manualHidden=false,expandedCards={};
+let overrides={},lockOverride=null,manualHidden=false,expandedCards={};
 
 // ---- automatic lockout ----
 // Submissions LOCK at the Wednesday-midnight deadline (entry sheet rule).
@@ -271,7 +273,11 @@ let overrides={},manualLocked=false,manualHidden=false,expandedCards={};
 function tournamentStarted(){return Date.now()>=new Date(REVEAL_TIME).getTime();}
 function deadlinePassed(){return Date.now()>=new Date(SUBMISSION_DEADLINE).getTime();}
 function picksHidden(){return !tournamentStarted()||manualHidden;}
-function picksLocked(){return deadlinePassed()||manualLocked;}
+function picksLocked(){
+  if(lockOverride===true)return true;   // admin forced locked
+  if(lockOverride===false)return false; // admin forced open
+  return deadlinePassed();              // auto: locks at the deadline
+}
 
 function kvKey(k){return KV_PREFIX+':'+k;}
 
@@ -296,8 +302,8 @@ async function loadAllData(){
   entries=remoteEntries||localGet(LS_ENTRIES,[]);
   try{localStorage.setItem(LS_ENTRIES,JSON.stringify(entries));}catch(e){}
 
-  const remoteLocked=await kvGet('locked');
-  manualLocked=remoteLocked!==null?remoteLocked:false;
+  const remoteLock=await kvGet('lockOverride');
+  lockOverride=(remoteLock===true||remoteLock===false)?remoteLock:null;
 
   const remoteHidden=await kvGet('hidden');
   manualHidden=remoteHidden!==null?remoteHidden:false;
@@ -579,22 +585,22 @@ function updateHideUI(){
   }
 }
 
-async function toggleLock(){
-  manualLocked=!manualLocked;
-  await kvSet('locked',manualLocked);
+async function setLock(state){
+  lockOverride=state; // true=force locked, false=force open, null=auto
+  await kvSet('lockOverride',state);
   updateLockUI();updateEnterTab();
 }
 function updateLockUI(){
-  const btn=document.getElementById('lockBtn');
   const status=document.getElementById('lockStatus');
-  if(!btn)return;
-  if(manualLocked){
-    btn.textContent='🔓 Unlock picks';btn.className='admin-btn active';
-    status.textContent='Force-locked (overrides auto)';status.style.color='var(--red)';
-  }else{
-    btn.textContent='🔒 Force-lock picks';btn.className='admin-btn';
-    status.textContent=picksLocked()?'Auto-locked (tournament started)':'Open';status.style.color='var(--muted)';
-  }
+  if(!status)return;
+  const ub=document.getElementById('unlockBtn'),lb=document.getElementById('lockBtn'),ab=document.getElementById('autoLockBtn');
+  [ub,lb,ab].forEach(b=>{if(b)b.classList.remove('active');});
+  let mode;
+  if(lockOverride===true){if(lb)lb.classList.add('active');mode='forced LOCKED';}
+  else if(lockOverride===false){if(ub)ub.classList.add('active');mode='forced OPEN';}
+  else{if(ab)ab.classList.add('active');mode='auto (locks at deadline)';}
+  status.innerHTML=`Submissions are <strong>${picksLocked()?'LOCKED':'OPEN'}</strong> &middot; ${mode}`;
+  status.style.color=picksLocked()?'var(--red)':'var(--green2)';
 }
 
 function updateEnterTab(){
