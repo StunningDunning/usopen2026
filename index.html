@@ -383,7 +383,13 @@ function findPlayer(name){
   return leaderboard.find(p=>normName(p.name).includes(last))||null;
 }
 
-function isCut(p){return p&&(['CUT','WD','DQ','MC'].includes((p.position||'').toUpperCase())||p.status==='STATUS_ELIMINATED');}
+function isCut(p){
+  if(!p)return false;
+  const pos=(p.position||'').toUpperCase();
+  if(['CUT','WD','DQ','MC','WDR','DSQ'].includes(pos))return true;       // position label
+  const st=(p.status||'').toUpperCase();
+  return /ELIMINAT|WITHDRAW|DISQUALIF|RETIRED|\bCUT\b|\bMC\b/.test(st);   // status string, any cut format
+}
 
 function scoreHtml(p){
   if(!p)return '<span class="even">—</span>';
@@ -396,19 +402,27 @@ function scoreHtml(p){
 function calcEntry(entry){
   const playerScores=entry.picks.map(pk=>{
     const p=findPlayer(pk.name);
-    if(!p)return{name:pk.name,group:pk.group,lb:null,val:null,cut:false};
+    if(!p)return{name:pk.name,group:pk.group,lb:null,val:null,cut:false,notStarted:false};
     const cut=isCut(p);
-    return{name:pk.name,group:pk.group,lb:p,val:cut?null:p.score,cut};
+    // Not-started golfers (still "scheduled") have no real score yet — ESPN reports them at 0.
+    const notStarted=!p._override&&p.status==='STATUS_SCHEDULED';
+    const val=(cut||notStarted)?null:p.score;
+    return{name:pk.name,group:pk.group,lb:p,val,cut,notStarted};
   });
-  const valid=playerScores.filter(s=>s.val!==null).map(s=>s.val).sort((a,b)=>a-b);
-  const cutCount=playerScores.filter(s=>s.cut).length;
-  const unknown=playerScores.filter(s=>s.lb===null).length;
-  const madeCount=entry.picks.length-cutCount-unknown;
-  const hasOverrides=Object.keys(overrides).some(k=>overrides[k]!=='');
-  if(leaderboard.length>0&&!hasOverrides&&madeCount<4){return{playerScores,total:null,best4:[],note:'Needs 4 to make cut'};}
-  const best4vals=valid.slice(0,4);
+  // Non-cut players = found on the leaderboard and NOT cut/WD/DQ.
+  const nonCut=playerScores.filter(s=>s.lb!==null&&!s.cut);
+  // Their actual to-par scores (excludes not-yet-started), lowest (best) first.
+  const scored=nonCut.filter(s=>s.val!==null).map(s=>s.val).sort((a,b)=>a-b);
+  // The cut is "in" once anyone in the field is marked cut. Elimination only applies after that.
+  const cutMade=leaderboard.length>0&&leaderboard.some(p=>isCut(p));
+  // ELIMINATED: once the cut is in, you need at least 4 non-cut players to post a score.
+  if(cutMade&&nonCut.length<4){
+    return{playerScores,total:null,best4:[],eliminated:true,note:'Eliminated — fewer than 4 made the cut'};
+  }
+  // TOTAL = sum of the 4 lowest non-cut scores.
+  const best4vals=scored.slice(0,4);
   const total=best4vals.length?best4vals.reduce((a,b)=>a+b,0):null;
-  return{playerScores,total,best4:best4vals,note:null};
+  return{playerScores,total,best4:best4vals,eliminated:false,note:null};
 }
 
 function renderLeaderboard(){
@@ -451,8 +465,9 @@ function renderStandings(){
     const rank=i+1;
     const rc=rank===1?'rank-1':rank===2?'rank-2':rank===3?'rank-3':'rank-other';
     const tot=e.result.total;
-    const totTxt=tot===null?'—':tot===0?'E':tot<0?tot:'+'+tot;
-    const totCls=tot!==null&&tot<0?'under':tot!==null&&tot>0?'over':'even';
+    const elim=e.result.eliminated;
+    const totTxt=elim?'CUT':tot===null?'—':tot===0?'E':tot<0?tot:'+'+tot;
+    const totCls=elim?'over':tot!==null&&tot<0?'under':tot!==null&&tot>0?'over':'even';
     const isOpen=expandedCards[e.name]!==false;
     const b4set=[...e.result.best4];
     const pickRows=e.result.playerScores.map(ps=>{
@@ -460,14 +475,16 @@ function renderStandings(){
       if(ps.val!==null){const idx2=b4set.indexOf(ps.val);if(idx2>=0){b4set.splice(idx2,1);isB4=true;}}
       const ovrTag=ps.lb&&ps.lb._override?'<span style="font-size:9px;color:var(--gold);margin-left:4px;font-family:DM Mono,monospace">OVR</span>':'';
       const b4tag=isB4?'<span style="color:var(--green);font-size:11px;margin-left:4px">&#10003;</span>':'';
-      return `<tr><td><span class="grp-badge grp-${ps.group}">${ps.group}</span>${ps.name}${ovrTag}${b4tag}</td><td>${scoreHtml(ps.lb)}</td><td class="thru">${ps.lb&&!ps.lb._override?ps.lb.thru||'':''}</td></tr>`;
+      const scoreCell=ps.notStarted?'<span class="even">&ndash;</span>':scoreHtml(ps.lb);
+      const thruCell=ps.notStarted?(ps.lb&&ps.lb.thru?ps.lb.thru:'')+'<span style="font-size:9px;color:var(--muted);margin-left:3px">not started</span>':(ps.lb&&!ps.lb._override?ps.lb.thru||'':'');
+      return `<tr><td><span class="grp-badge grp-${ps.group}">${ps.group}</span>${ps.name}${ovrTag}${b4tag}</td><td>${scoreCell}</td><td class="thru">${thruCell}</td></tr>`;
     }).join('');
     const hiddenBody=`<div style="padding:12px 0;font-size:13px;color:var(--muted);font-family:'DM Mono',monospace;text-align:center">&#128274; Picks hidden until the tournament starts</div>`;
     return `<div class="entry-card ${rc} fade-in">
       <div class="entry-header" onclick="${hideNow?'':'toggleCard(\''+e.name.replace(/'/g,"\\'")+'\')'}">
         <div class="entry-left">
           <div class="rank-num">${rank}</div>
-          <div><div class="entry-name">${e.name}</div><div class="entry-tb">TB: ${hideNow?'—':e.tiebreaker!==''?e.tiebreaker:'—'}</div></div>
+          <div><div class="entry-name">${e.name}</div><div class="entry-tb">${elim&&!hideNow?'<span style="color:var(--red)">Eliminated &mdash; &lt;4 made the cut</span>':'TB: '+(hideNow?'—':e.tiebreaker!==''?e.tiebreaker:'—')}</div></div>
         </div>
         <div class="entry-right">
           <div class="entry-total ${totCls}">${hideNow?'—':totTxt}</div>
